@@ -25,7 +25,30 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     if (user !== null) {
       this.getChatByRoom(user.room);
 
+      this.msgData = { room: user.room, nickname: user.nickname, message: '' }
+      this.joinned = true;
+      this.scrollToBottom();
     }
+
+    this.socket.on('new-message', function(data) {
+      if (data.message.room === JSON.parse(localStorage.getItem("user")).room) {
+        this.chats.push(data.message);
+        this.msgData = { room: user.room, nickname: user.nickname, message: '' }
+        this.scrollToBottom();
+      }
+    }.bind(this));
   }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+
+// start from here
 
 }
