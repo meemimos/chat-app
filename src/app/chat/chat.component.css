@@ -1,3 +1,32 @@
+.margin-top {
+    margin-top: 5px;
+}
+
+.margin-top-large {
+    margin-top: 10px;
+}
+
+.margin-top-x-large {
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.card-join-room {
+
+}
+
+.message-box {
+    background-color: rgb(150, 150, 150);
+    color: white!important;
+    padding: 10px 5px 10px 15px;
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+}
+
 .chat
 {
     list-style: none;
@@ -36,8 +65,7 @@
 
 .panel-body
 {
-    overflow-y: scroll;
-    height: 250px;
+    height: auto;
 }
 
 ::-webkit-scrollbar-track

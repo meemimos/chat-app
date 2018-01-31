@@ -32,7 +32,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     this.socket.on('new-message', function(data) {
       if (data.message.room === JSON.parse(localStorage.getItem('user')).room) {
+        console.log(data.message.room);        
         this.chats.push(data.message);
+        console.log(this.chats);
         this.msgData = { room: user.room, nickname: user.nickname, message: '' };
         this.scrollToBottom();
       }
@@ -69,6 +71,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   sendMessage() {
     this.chatService.saveChat(this.msgData).then((result) => {
       this.socket.emit('save-message', result);
+      this.msgData.message = '';
     }, (err) => {
       console.log(err);
     });
