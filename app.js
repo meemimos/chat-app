@@ -11,7 +11,6 @@ mongoose.connect('mongodb://localhost/chat-app')
     .then(() => console.log('connection successful'))
     .catch((err) => console.log(err));
 
-var routes = require('./routes/index');
 var chat = require('./routes/chat');
 var app = express();
 
@@ -28,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 //     res.send("Testing..");
 // });
 
-app.use('/', routes);
 app.use('/chat', chat);
 
 // catch 404 and forward to error handler

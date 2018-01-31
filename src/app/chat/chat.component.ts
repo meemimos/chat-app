@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { ChatService } from '../chat.service';
-import * as io from "socket.io-client";
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-chat',
@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
-    var user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     if (user !== null) {
       this.getChatByRoom(user.room);
 
@@ -31,9 +31,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
 
     this.socket.on('new-message', function(data) {
-      if (data.message.room === JSON.parse(localStorage.getItem("user")).room) {
+      if (data.message.room === JSON.parse(localStorage.getItem('user')).room) {
         this.chats.push(data.message);
-        this.msgData = { room: user.room, nickname: user.nickname, message: '' }
+        this.msgData = { room: user.room, nickname: user.nickname, message: '' };
         this.scrollToBottom();
       }
     }.bind(this));
@@ -46,9 +46,39 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) { }
+  }
+  getChatByRoom(room) {
+    this.chatService.getChatByRoom(room).then((res) => {
+      this.chats = res;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
-// start from here https://www.djamware.com/post/58e0d15280aca75cdc948e4e/building-chat-application-using-mean-stack-angular-4-and-socketio
+  joinRoom() {
+    const date = new Date();
+    localStorage.setItem('user', JSON.stringify(this.newUser));
+    this.getChatByRoom(this.newUser.room);
+    this.msgData = { room: this.newUser.room, nickname: this.newUser.nickname, message: '' };
+    this.joinned = true;
+    this.socket.emit('save-message', { room: this.newUser.room, nickname: this.newUser.nickname, message: 'Join this room',
+    updated_at: date });
+  }
 
+  sendMessage() {
+    this.chatService.saveChat(this.msgData).then((result) => {
+      this.socket.emit('save-message', result);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  logout() {
+    const date = new Date();
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.socket.emit('save-message', { room: user.room, nickname: user.nickname, message: 'Left this room', updated_at: date});
+    localStorage.removeItem('user');
+    this.joinned = false;
+  }
 }
