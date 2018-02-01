@@ -3,10 +3,10 @@
       <div class="col-md-5">
           <div class="panel panel-primary" *ngIf="joinned; else joinroom">
               <div class="panel-heading">
-                  <span class="glyphicon glyphicon-comment"></span> {{ msgData.room }}
-                  <div class="btn-group pull-right">
-                      <button type="button" class="btn btn-default btn-xs" (click)="logout()">
-                          Logout
+                    <span class="glyphicon glyphicon-comment"></span> {{ msgData.room }}
+                  <div class="btn-group pull-right margin-bottom">
+                      <button type="button" class="btn btn-default btn-sm" (click)="logout()">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
                       </button>
                   </div>
               </div>
@@ -17,13 +17,14 @@
                           <div class="media">
                             <div class="media-left media-bottom">
                               <span class="chat-img margin-top">
-                                <img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                <img src="http://placehold.it/50/55C1E7/fff&text={{c.nickname.slice(0, 2) | uppercase }}" alt="User Avatar" class="img-circle" />
                               </span>
                             </div>
                             <div class="media-body">
-                              <div class="chat-body clearfix">
-                                  <h4 class="media-heading">{{ c.nickname }}</h4><small class="text-center text-muted margin-top">{{ c.updated_at | date: 'HH:mm' }}</small>
-                                  <p class="message-box">{{ c.message }}</p>
+                              <div class="chat-body clearfix text-center">
+                                  <!-- <h4 class="media-heading">{{ c.nickname.slice(0, 1) }}</h4> -->
+                                  <small class="text-center text-muted margin-top margin-right">{{ c.updated_at | date: 'HH:mm' }}</small>
+                                  <p class="message-box-left text-left">{{ c.message }}</p>
                               </div>
                             </div>
                           </div>
@@ -33,15 +34,19 @@
                           <div class="right clearfix">
                             <div class="media">
                               <div class="media-body">
-                                <div class="chat-body clearfix">
+                                <div class="chat-body clearfix text-center">
                                     <!-- <h4 class="meading-heading">{{ c.nickname }}</h4> -->
-                                    <small class="text-muted margin-top text-center">{{ c.updated_at | date: 'HH:mm' }}</small>
-                                    <p class="message-box">{{ c.message }}</p>
+                                    <div class="col-sm-12 padding-right-reset">
+                                      <small class="text-muted margin-top margin-left">{{ c.updated_at | date: 'HH:mm' }}</small>
+                                    </div>
+                                    <div class="col-sm-12 padding-right-reset">
+                                      <p class="message-box-right text-right">{{ c.message }}</p>
+                                    </div>
                                 </div>
                               </div>
                               <div class="media-right media-bottom">
                                   <span class="chat-img pull-right margin-top">
-                                    <img src="http://placehold.it/50/FA6F57/fff&text=FR" alt="User Avatar" class="img-circle" />
+                                    <img src="http://placehold.it/50/FA6F57/fff&text={{c.nickname.slice(0, 2) | uppercase }}" alt="User Avatar" class="img-circle" />
                                   </span>
                                 </div>
                             </div>
@@ -58,7 +63,7 @@
                       <input type="hidden" [(ngModel)]="msgData.nickname" name="nickname" />
                       <input id="btn-input" type="text" [(ngModel)]="msgData.message" name="message" class="form-control input-sm" placeholder="Type your message here..." required="" />
                       <span class="input-group-btn">
-                          <button class="btn btn-warning btn-sm" id="btn-chat" [disabled]="!msgForm.form.valid">
+                          <button class="btn btn-primary btn-sm" id="btn-chat" [disabled]="!msgForm.form.valid">
                               Send</button>
                       </span>
                   </div>

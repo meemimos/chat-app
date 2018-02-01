@@ -3,42 +3,96 @@
 }
 
 .margin-top-large {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .margin-top-x-large {
     margin-top: 20px;
 }
 
+.margin-bottom {
+    margin-bottom: 5px;
+}
+
+.margin-bottom-large {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-x-large {
+    margin-bottom: 20px;
+}
+
+.padding-right-reset {
+    padding-right: 0px;
+}
+
 .text-center {
     text-align: center;
 }
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.margin-left {
+    margin-left: 15%;
+}
+
+.margin-right {
+    margin-right: 15%;
+}
+
 
 .card-join-room {
 
 }
 
-.message-box {
+.message-box-right {
     background-color: rgb(150, 150, 150);
     color: white!important;
-    padding: 10px 5px 10px 15px;
-    border-radius: 20px;
-    width: auto;
-    height: auto;
+    padding: 8px 16px 8px 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    width: fit-content;
+    margin-left: 15%!important;
+    float: right;
+}
+
+.message-box-left {
+    background-color: rgb(150, 150, 150);
+    color: white!important;
+    padding: 8px 16px 8px 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    width: fit-content;
+    margin-right: 15%!important;
+}
+
+.btn-transparent {
+    background-color: transparent;
 }
 
 .chat
 {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0px 10px 0px 0px;
+    height: 500px;
+    overflow-y: scroll;
+
 }
 
 .chat li
 {
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
+    /* border-bottom: 1px dotted #B3A9A9; */
 }
 
 .chat li.left .chat-body
@@ -68,20 +122,24 @@
     height: auto;
 }
 
+.panel-heading {
+    padding: 10px 15px 21px 10px;
+}
+
 ::-webkit-scrollbar-track
 {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    /* -webkit-box-shadow: inset 0 0 6px rgba(229, 226, 226, 0.767); */
+    /* background-color: #F5F5F5; */
 }
 
 ::-webkit-scrollbar
 {
-    width: 12px;
-    background-color: #F5F5F5;
+    width: 3px;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb
 {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
+    -webkit-box-shadow: inset 0 0 6px rgba(173, 171, 171, 0.692);
+    /* background-color: #555; */
 }
